@@ -27,9 +27,11 @@ export const placeOrder = async (req: AuthRequest, res: Response) => {
     }
     await Cart.findOneAndUpdate({ user: req.user!.userId }, { items: [], totalAmount: 0 });
     res.status(201).json(order);
-  } catch (err) { res.status(500).json({ message: 'Server error', error: err }); }
+  } catch (err: any) {
+  console.error('Place order error:', err.message);
+  res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };
-
 export const getMyOrders = async (req: AuthRequest, res: Response) => {
   try {
     const orders = await Order.find({ user: req.user!.userId }).sort({ createdAt: -1 });
@@ -62,5 +64,8 @@ export const updateOrderStatus = async (req: AuthRequest, res: Response) => {
     );
     if (!order) return res.status(404).json({ message: 'Order not found' });
     res.json(order);
-  } catch (err) { res.status(500).json({ message: 'Server error' }); }
+  } catch (err: any) {
+  console.error('Update order status error:', err.message);
+  res.status(500).json({ message: 'Server error', error: err.message });
+  }
 };

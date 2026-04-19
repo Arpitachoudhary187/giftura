@@ -48,7 +48,7 @@ app.get('/api/health', (_req, res) => res.json({ status: 'OK', timestamp: new Da
 initOrderTracking(io);
 
 mongoose
-  .connect(process.env.MONGO_URI as string)
+.connect(process.env.MONGODB_URI!)
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB error:', err));
 
