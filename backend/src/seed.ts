@@ -376,7 +376,7 @@ const products = [
 
 const seedDB = async () => {
   try {
-    await mongoose.connect('mongodb+srv://arpitagujrati214_db_user:t7nC7Z1o2QJScnMw@cluster0.4rfrgsw.mongodb.net/giftura');
+    await mongoose.connect('');
     console.log('✅ Connected to MongoDB');
 
     await Product.deleteMany({});
