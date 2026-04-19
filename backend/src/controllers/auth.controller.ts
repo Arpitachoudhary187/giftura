@@ -3,8 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User.model';
 
-const signToken = (userId: string, role: string) =>
-  jwt.sign({ userId, role }, process.env.JWT_SECRET!, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
+const signToken = (userId: string, role: string): string => {
+  return jwt.sign(
+    { userId, role },
+    process.env.JWT_SECRET as string,
+    { expiresIn: '7d' }
+  );
+};
 
 export const signup = async (req: Request, res: Response) => {
   try {
